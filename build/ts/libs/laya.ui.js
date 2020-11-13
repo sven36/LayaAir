@@ -2554,8 +2554,11 @@
 	    }
 	    loop() {
 	        var mouseY = Laya.ILaya.stage.mouseY;
-	        var mouseX = Laya.ILaya.stage.mouseX;
+			var mouseX = Laya.ILaya.stage.mouseX;
+			console.log('mouseY ',mouseY);
+			
 	        this._lastOffset = this.isVertical ? (mouseY - this._lastPoint.y) : (mouseX - this._lastPoint.x);
+			console.log('_lastOffsetY  ',this._lastOffset);
 	        if (this._clickOnly) {
 	            if (Math.abs(this._lastOffset * (this.isVertical ? Laya.ILaya.stage._canvasTransform.getScaleY() : Laya.ILaya.stage._canvasTransform.getScaleX())) > 1) {
 	                this._clickOnly = false;
@@ -2660,7 +2663,9 @@
 	            }
 	            if (offset > 250)
 	                this._lastOffset = this._lastOffset > 0 ? 250 : -250;
-	            var dis = Math.round(Math.abs(this.elasticDistance * (this._lastOffset / 150)));
+				var dis = Math.round(Math.abs(this.elasticDistance * (this._lastOffset / 150)));
+				console.log('_lastOffset ',this._lastOffset);
+				console.log('maxDis ',dis);
 	            Laya.ILaya.timer.frameLoop(1, this, this.tweenMove, [dis]);
 	        }
 	    }

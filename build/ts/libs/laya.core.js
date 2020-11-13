@@ -5037,7 +5037,7 @@ window.Laya = (function (exports) {
             if (vertN > 0) {
                 var end = stibid + sz;
                 var si = 0;
-                for (i = stibid; i < end; i++ , si++) {
+                for (i = stibid; i < end; i++, si++) {
                     cidx[i] = idx[si] + vertN;
                 }
             }
@@ -11879,8 +11879,8 @@ window.Laya = (function (exports) {
             if (!window.ssttArr2) {
                 window.ssttArr2 = [];
             }
-            if (window.ssttArr2.length < 40) {
-                console.log('render Name2', r._fun);
+            if (window.ssttArr2.length < 20) {
+                console.log('render Name2 _initRenderFun ', r._fun);
                 window.ssttArr2.push(1);
             }
             r._fun(sprite, context, x, y);
@@ -11949,6 +11949,9 @@ window.Laya = (function (exports) {
         _graphics(sprite, context, x, y) {
             var style = sprite._style;
             var g = sprite._graphics;
+            if (g && g._render.name !== '_renderEmpty') {
+                // console.log('g._render name', g && g._render);
+            }
             g && g._render(sprite, context, x - style.pivotX, y - style.pivotY);
             var next = this._next;
             if (next != RenderSprite.NORENDER)
@@ -13996,7 +13999,7 @@ window.Laya = (function (exports) {
             if (!window.ssttArr) {
                 window.ssttArr = [];
             }
-            if (window.ssttArr.length < 40) {
+            if (window.ssttArr.length < 20) {
                 console.log('render Name', RenderSprite.renders[this._renderType]._fun.name);
                 window.ssttArr.push(1);
             }
