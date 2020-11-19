@@ -11,7 +11,7 @@ window.Laya = (function (exports) {
     Config.preserveDrawingBuffer = false;
     Config.webGL2D_MeshAllocMaxMem = true;
     Config.is2DPixelArtGame = false;
-    Config.useWebGL2 = true;
+    Config.useWebGL2 = false;
     Config.allowGPUInstanceDynamicBatch = true;
     Config.useRetinalCanvas = false;
     window.Config = Config;
@@ -11677,6 +11677,7 @@ window.Laya = (function (exports) {
             LayaGLQuickRunner.map[SpriteConst.ALPHA | SpriteConst.TEXTURE] = LayaGLQuickRunner.alpha_drawTexture;
             LayaGLQuickRunner.map[SpriteConst.TRANSFORM | SpriteConst.TEXTURE] = LayaGLQuickRunner.transform_drawTexture;
             LayaGLQuickRunner.map[SpriteConst.GRAPHICS | SpriteConst.CHILDS] = LayaGLQuickRunner.drawLayaGL_drawNodes;
+            console.log('LayaGLQuickRunner', LayaGLQuickRunner.map);
         }
         static transform_drawTexture(sprite, context, x, y) {
             var style = sprite._style;
@@ -11876,13 +11877,10 @@ window.Laya = (function (exports) {
         static _initRenderFun(sprite, context, x, y) {
             var type = sprite._renderType;
             var r = RenderSprite.renders[type] = RenderSprite._getTypeRender(type);
-            if (!window.ssttArr2) {
-                window.ssttArr2 = [];
-            }
-            if (window.ssttArr2.length < 20) {
-                console.log('render Name2 _initRenderFun ', r._fun);
-                window.ssttArr2.push(1);
-            }
+            console.log('sprite ', sprite);
+            console.log('render Name ', r._fun);
+            console.log('type ', type);
+            console.log('=======  =========');
             r._fun(sprite, context, x, y);
         }
         static _getTypeRender(type) {
@@ -13996,13 +13994,6 @@ window.Laya = (function (exports) {
             return this;
         }
         render(ctx, x, y) {
-            if (!window.ssttArr) {
-                window.ssttArr = [];
-            }
-            if (window.ssttArr.length < 20) {
-                console.log('render Name', RenderSprite.renders[this._renderType]._fun.name);
-                window.ssttArr.push(1);
-            }
             RenderSprite.renders[this._renderType]._fun(this, ctx, x + this._x, y + this._y);
             this._repaint = 0;
         }
