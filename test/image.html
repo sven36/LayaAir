@@ -1,205 +1,267 @@
 <!DOCTYPE html>
+
 <head>
-<meta charset='utf-8'/>
-<title>www.layabox.com</title>
-<meta name='apple-mobile-web-app-capable' content='yes' />
-<meta name='full-screen' content='true' />
-<meta name='screen-orientation' content='portrait' />
-<meta name='x5-fullscreen' content='true' />
-<meta name='360-fullscreen' content='true' />
-<meta http-equiv='expires' content='0' />
-<meta name='laya' logoimg='logo.png' logobkcolor='#ffffff' screenorientation='landscape' cacheid='fffffffff' />
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=LIhOlvWfdiPYMCsK5wsqlFQD8wW4Bfy6&s=1"></script> -->
+    <meta charset='utf-8' />
+    <title>www.layabox.com</title>
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='full-screen' content='true' />
+    <meta name='screen-orientation' content='portrait' />
+    <meta name='x5-fullscreen' content='true' />
+    <meta name='360-fullscreen' content='true' />
+    <meta http-equiv='expires' content='0' />
+    <meta name='laya' logoimg='logo.png' logobkcolor='#ffffff' screenorientation='landscape' cacheid='fffffffff' />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=LIhOlvWfdiPYMCsK5wsqlFQD8wW4Bfy6&s=1"></script> -->
 </head>
-<body style="background-color: black;">
-<script>
 
-var layaAirLibBasePath = "js/";;
-var d3CommandLibBasePath = "http://layaair.ldc.layabox.com/demo/master/samples/js/3d/";
-var d3CustomLibBasePath = "http://layaair.ldc.layabox.com/demo/master/samples/js/3d/advancedStage/";
-var libs;
-var manifest, libsMap, pathMap;
-var theCode;
+<body>
+    <script>
+        // style="background-color: black;"
+        var layaAirLibBasePath = "js/";;
+        var d3CommandLibBasePath = "http://layaair.ldc.layabox.com/demo/master/samples/js/3d/";
+        var d3CustomLibBasePath = "http://layaair.ldc.layabox.com/demo/master/samples/js/3d/advancedStage/";
+        var libs;
+        var manifest, libsMap, pathMap;
+        var theCode;
 
-function getQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return null;
-}
-
-function parseToSearchUrl(key) {
-    var keyArr = key.split("&");
-    return "category=" + keyArr[0] + "&group=" + keyArr[1] + "&name=" + keyArr[2];
-}
-
-if(location.search)
-{
-    var search = location.search.substr(1);
-    // var p = search.split('&');
-    var p = [
-        getQueryString("category"),
-        getQueryString("group"),
-        getQueryString("name"),
-        getQueryString("lib")
-    ];
-
-   loadLibs(p[3].split(','), function()
-   {
-        // path
-        var path = p[0] + '/js/';
-        if(p[0] == '2d')
-        {
-            path += p[1] + '_' + p[2] + '.js';
-        }
-        else
-        {
-            path += p[1].toLowerCase() + 'Module' + '/';
-            path += p[2];
-            path += '.js';
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
         }
 
-        // load js file
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", path, false);
-        xmlhttp.send(null);
+        function parseToSearchUrl(key) {
+            var keyArr = key.split("&");
+            return "category=" + keyArr[0] + "&group=" + keyArr[1] + "&name=" + keyArr[2];
+        }
 
-        var code = convertDemoResPath(xmlhttp.responseText);
-        createScript("source", code);
-   });
-}
+        if (location.search) {
+            var search = location.search.substr(1);
+            // var p = search.split('&');
+            var p = [
+                getQueryString("category"),
+                getQueryString("group"),
+                getQueryString("name"),
+                getQueryString("lib")
+            ];
 
-function showWithCode(code, libs)
-{
-    // fix resource paths
-    theCode = code.replace(/\.\.\/\.\.\//g, '');
-    loadLibs(libs.split(","), appendCode);
-}
+            loadLibs(p[3].split(','), function () {
+                // path
+                var path = p[0] + '/js/';
+                if (p[0] == '2d') {
+                    path += p[1] + '_' + p[2] + '.js';
+                } else {
+                    path += p[1].toLowerCase() + 'Module' + '/';
+                    path += p[2];
+                    path += '.js';
+                }
 
-function appendCode(code)
-{
-    if(!code) code = theCode;
-    var script = document.createElement("script");
-    script.innerHTML = code;
-    document.head.appendChild(script);
-}
+                // load js file
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", path, false);
+                xmlhttp.send(null);
 
-function loadLibs(libs, onFinish)
-{
-    if(libs.length == 0) 
-    {
-        onFinish();
-        return;
-    }
+                var code = convertDemoResPath(xmlhttp.responseText);
+                createScript("source", code);
+            });
+        }
 
-    var lib = libs.shift();
+        function showWithCode(code, libs) {
+            // fix resource paths
+            theCode = code.replace(/\.\.\/\.\.\//g, '');
+            loadLibs(libs.split(","), appendCode);
+        }
 
-    switch(lib)
-    {
-        /*
-         * 百度地图的异步加载方式，在参数中传入回调，不由script.onload控制。
-         * 由于此处的return导致后续lib不继续加载，所以百度地图必须使最后一个lib
+        function appendCode(code) {
+            if (!code) code = theCode;
+            var script = document.createElement("script");
+            script.innerHTML = code;
+            document.head.appendChild(script);
+        }
+
+        function loadLibs(libs, onFinish) {
+            if (libs.length == 0) {
+                onFinish();
+                return;
+            }
+
+            var lib = libs.shift();
+
+            switch (lib) {
+                /*
+                 * 百度地图的异步加载方式，在参数中传入回调，不由script.onload控制。
+                 * 由于此处的return导致后续lib不继续加载，所以百度地图必须使最后一个lib
+                 */
+                case "BaiduMap":
+                    lib =
+                        "https://api.map.baidu.com/api?v=2.0&ak=LIhOlvWfdiPYMCsK5wsqlFQD8wW4Bfy6&s=1&callback=appendCode";
+                    createScript("url", lib);
+                    return;
+                case "protobuf":
+                    lib = "lib/protobuf.min.js";
+                    break;
+                case "matter.js":
+                case "LayaRender.js":
+                    lib = "lib/" + lib;
+                    break;
+                case "UI%20code":
+                case "UI code":
+                    lib = "lib/LayaUISample.max.all.js";
+                    break;
+                case "Tool.js":
+                case "pbrlut.js":
+                case "CameraMoveScript.js":
+                case "VRCameraMoveScript.js":
+                case "ColliderScript.js":
+                case "DrawBoxColliderScript.js":
+                    lib = "3d/js/common/" + lib;
+                    break;
+                case "CustomMaterial.js":
+                case "CustomTerrainMaterial.js":
+                    lib = "3d/js/shaderModule/customMaterials/" + lib;
+                    break;
+                default:
+                    lib = "lib/laya." + lib + ".js";
+                    break;
+            }
+
+            createScript("url", lib).onload = function () {
+                loadLibs(libs, onFinish);
+            }
+        }
+
+        /**
+         * @param  {string} type  source | url, if empty, just create a script tag.
+         * @param  {string} value while type is "source", "value" is source code; while type is "url", "value" is url address.
+         * @return {<script>}     script tag.
          */
-        case "BaiduMap":
-            lib = "https://api.map.baidu.com/api?v=2.0&ak=LIhOlvWfdiPYMCsK5wsqlFQD8wW4Bfy6&s=1&callback=appendCode";
-            createScript("url", lib);
-            return;
-        case "protobuf":
-            lib = "lib/protobuf.min.js";
-            break;
-        case "matter.js":
-        case "LayaRender.js":
-            lib = "lib/" + lib;
-            break;
-        case "UI%20code":
-        case "UI code":
-            lib = "lib/LayaUISample.max.all.js";
-            break;
-        case "Tool.js":
-        case "pbrlut.js":
-        case "CameraMoveScript.js":
-        case "VRCameraMoveScript.js":
-        case "ColliderScript.js":
-        case "DrawBoxColliderScript.js":
-            lib = "3d/js/common/" + lib;
-            break;
-        case "CustomMaterial.js":
-        case "CustomTerrainMaterial.js":
-            lib = "3d/js/shaderModule/customMaterials/" + lib;
-            break;
-        default:
-            lib = "lib/laya." + lib + ".js";
-            break;
-    }
+        function createScript(type, value) {
+            var script = document.createElement("script");
+            document.head.appendChild(script);
 
-    createScript("url", lib).onload = function()
-    {
-        loadLibs(libs, onFinish);
-    }
-}
+            if (!type) return script;
 
-/**
- * @param  {string} type  source | url, if empty, just create a script tag.
- * @param  {string} value while type is "source", "value" is source code; while type is "url", "value" is url address.
- * @return {<script>}     script tag.
- */
-function createScript(type, value)
-{
-    var script = document.createElement("script");
-    document.head.appendChild(script);
+            switch (type) {
+                case "source":
+                    script.innerHTML = value;
+                    break;
+                case "url":
+                    script.src = value;
+                    break;
+            }
+            return script;
+        }
 
-    if(!type) return script;
-
-    switch(type)
-    {
-        case "source":
-            script.innerHTML = value;
-            break;
-        case "url":
-            script.src = value;
-            break;
-    }
-    return script;
-}
-
-function convertDemoResPath(code)
-{
-    return code.replace(/(\.\.\/)+/g, "");
-}
-</script>
+        function convertDemoResPath(code) {
+            return code.replace(/(\.\.\/)+/g, "");
+        }
+    </script>
 </body>
+
 </html>
 <script src="../build/ts/libs/laya.core.js"></script>
 
 <script src="../build/ts/libs/laya.ui.js"></script>
-<script>// 这段代码需要在setupDemo之前执行。 
-(function()
-{
-	var Stage = Laya.Stage;
-	var Image = Laya.Image;
-	var WebGL = Laya.WebGL;
+<script>
+    // 这段代码需要在setupDemo之前执行。 
+    (function () {
+        var Stage = Laya.Stage;
+        var Image = Laya.Image;
+        var WebGL = Laya.WebGL;
 
-	(function()
-	{
-		// 不支持WebGL时自动切换至Canvas
-		Laya.init(550, 400, WebGL);
+        (function () {
+            // 不支持WebGL时自动切换至Canvas
+            Laya.init(550, 400, WebGL);
 
-		Laya.stage.alignV = Stage.ALIGN_MIDDLE;
-		Laya.stage.alignH = Stage.ALIGN_CENTER;
+            Laya.stage.alignV = Stage.ALIGN_MIDDLE;
+            Laya.stage.alignH = Stage.ALIGN_CENTER;
 
-		Laya.stage.scaleMode = Stage.SCALE_SHOWALL;
-		Laya.stage.bgColor = "#232628";
+            Laya.stage.scaleMode = Stage.SCALE_SHOWALL;
+            Laya.stage.bgColor = "#232628";
 
-		setup();
-	})();
+            setup();
+        })();
 
-	function setup()
-	{
-		var dialog = new Image("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/dialog%20(3).png");
-        dialog.width=500;
-		dialog.pos(165, 62.5);
-		Laya.stage.addChild(dialog);
-	}
-})();
-//<script src="../build/ts/libs/laya.webgl.js">
+        function setup() {
+            var dialog = new Image("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/dialog%20(3).png");
+            dialog.width = 500;
+            dialog.pos(165, 62.5);
+            Laya.stage.addChild(dialog);
+        }
+
+        function astt() {
+
+            const canvas = document.createElement('canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            document.body.appendChild(canvas);
+            let gl = canvas.getContext('webgl');
+            gl.clearColor(0., 0., 0., 1.);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            // ctx.fillStyle = 'blue';
+            // ctx.fillRect(120, 10, 150, 150);
+            let shaderSource = `
+        attribute vec4 ast;
+        void main() {
+            gl_Position = ast;
+            gl_PointSize = 10.0;
+        }
+        `;
+            let fragSource = `
+        precision mediump float;
+        uniform vec4 rage;
+        void main(){
+            gl_FragColor= rage;
+        }
+        `;
+            initShaders(gl);
+
+            let buf = gl.createBuffer();
+            let ves = new Float32Array([0., 0.5,
+                -0.5, -0.5,
+                0.5, -0.5
+            ]);
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, ves, gl.STATIC_DRAW);
+            // gl.bufferSubData()
+            //stride 指定相邻两个顶点间的字节数，默认为0;
+            //offset 指定缓存区对象中的偏移量（以字节为单位）即，attribute变量从缓存区中的何处开始存储，如果起始位置则为0
+            let st = gl.getAttribLocation(gl.program, 'ast');
+            gl.vertexAttribPointer(st, 2, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(st);
+            // gl.vertexAttrib3f(st, 0., 0., 0.);
+            let ug = gl.getUniformLocation(gl.program, 'rage');
+            gl.uniform4f(ug, 0.1, 1.0, 1.0, 1.0);
+
+
+
+            gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+            function initShaders(gl) {
+                let shader = gl.createShader(gl.VERTEX_SHADER);
+                gl.shaderSource(shader, shaderSource);
+                gl.compileShader(shader);
+                // gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+                if (gl.getShaderInfoLog(shader)) {
+                    console.log(gl.getShaderInfoLog(shader));
+                }
+                let fragShader = gl.createShader(gl.FRAGMENT_SHADER);
+                gl.shaderSource(fragShader, fragSource);
+                gl.compileShader(fragShader);
+                gl.getShaderInfoLog(fragShader);
+
+                let program = gl.createProgram();
+                gl.attachShader(program, shader);
+                gl.attachShader(program, fragShader);
+                gl.linkProgram(program);
+
+                gl.useProgram(program);
+                gl.program = program;
+            }
+        }
+
+    })();
+    //<script src="../build/ts/libs/laya.webgl.js">
 </script>
