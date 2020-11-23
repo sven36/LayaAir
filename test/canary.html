@@ -179,6 +179,10 @@ function convertDemoResPath(code)
 	var Box   = Laya.Box;
 	var Image = Laya.Image;
 
+	var WID = 373,
+		HEI = 85;
+
+
     class Item extends Box {
 
         constructor(){
@@ -228,19 +232,19 @@ function convertDemoResPath(code)
 
 		// 使用但隐藏滚动条
 		list.vScrollBarSkin = "";
-        list.bgColor='red';
+
 		//list.selectEnable = true;
 		//list.selectHandler = new Handler(this, onSelect);
 
-		//list.renderHandler = new Handler(this, updateItem);
+		list.renderHandler = new Handler(this, updateItem);
 		Laya.stage.addChild(list);
 
 		// 设置数据项为对应图片的路径
 		var data = [];
 		for (var i = 0; i < 1; ++i)
 		{
-			//data.push("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/listskins/1.jpg");
-			//data.push("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/listskins/2.jpg");
+			data.push("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/listskins/1.jpg");
+			data.push("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/listskins/2.jpg");
 			//data.push("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/listskins/3.jpg");
 			//data.push("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/listskins/4.jpg");
 			//data.push("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/listskins/5.jpg");
