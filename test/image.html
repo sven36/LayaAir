@@ -182,7 +182,7 @@
             Laya.stage.bgColor = "#232628";
 
             setup();
-        })();
+        });
 
         function setup() {
             var dialog = new Image("https://layaair2.ldc2.layabox.com/demo/h5/res/ui/dialog%20(3).png");
@@ -190,6 +190,7 @@
             dialog.pos(165, 62.5);
             Laya.stage.addChild(dialog);
         }
+        astt();
 
         function astt() {
 
@@ -225,6 +226,12 @@
             ]);
             gl.bindBuffer(gl.ARRAY_BUFFER, buf);
             gl.bufferData(gl.ARRAY_BUFFER, ves, gl.STATIC_DRAW);
+
+            let ib = gl.createBuffer();
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib);
+            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2]), gl.STATIC_DRAW);
+            //void gl.bufferSubData(target, offset, ArrayBuffer srcData); 
+            
             // gl.bufferSubData()
             //stride 指定相邻两个顶点间的字节数，默认为0;
             //offset 指定缓存区对象中的偏移量（以字节为单位）即，attribute变量从缓存区中的何处开始存储，如果起始位置则为0
@@ -234,10 +241,8 @@
             // gl.vertexAttrib3f(st, 0., 0., 0.);
             let ug = gl.getUniformLocation(gl.program, 'rage');
             gl.uniform4f(ug, 0.1, 1.0, 1.0, 1.0);
-
-
-
-            gl.drawArrays(gl.TRIANGLES, 0, 3);
+            // gl.drawArrays(gl.TRIANGLES, 0, 3);
+            gl.drawElements(gl.TRIANGLES, 3, gl.UNSIGNED_SHORT, 0);
 
             function initShaders(gl) {
                 let shader = gl.createShader(gl.VERTEX_SHADER);
