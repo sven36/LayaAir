@@ -6598,6 +6598,10 @@ var Laya = window.Laya = (function (window, document) {
 		RenderSprite._initRenderFun = function (sprite, context, x, y) {
 			var type = sprite._renderType;
 			var r = RenderSprite.renders[type] = RenderSprite._getTypeRender(type);
+			console.log('sprite ', sprite);
+            console.log('render Name ', r._fun);
+            console.log('type ', type);
+            console.log('=======  =========');
 			r._fun(sprite, context, x, y);
 		}
 
