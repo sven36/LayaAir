@@ -169,12 +169,15 @@ function convertDemoResPath(code)
 </script>
 </body>
 </html>
-<script src="../build/ts/libs/laya.core.js"></script>
+<script src="../build/1.8.11/libs/laya.core.js"></script>
+<script src="../build/1.8.11/libs/laya.ui.js"></script>
 
-<script src="../build/ts/libs/laya.ui.js"></script>
 <script>// 这段代码需要在setupDemo之前执行。 
 (function()
 {
+    //<script src="../build/ts/libs/laya.core.js">
+
+//<script src="../build/ts/libs/laya.ui.js">
 	// 项渲染器
 	var Box   = Laya.Box;
 	var Image = Laya.Image;
@@ -207,7 +210,7 @@ function convertDemoResPath(code)
 	(function()
 	{
 		// 不支持WebGL时自动切换至Canvas
-		Laya.init(375, 667, WebGL);
+		Laya.init(375, 667);
 
 		Laya.stage.alignV = Stage.ALIGN_MIDDLE;
 		Laya.stage.alignH = Stage.ALIGN_CENTER;
