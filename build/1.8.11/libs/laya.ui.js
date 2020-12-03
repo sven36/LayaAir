@@ -3513,6 +3513,7 @@
 
 		/**@private */
 		__proto.slide = function (isUp) {
+			console.log('slide value', this.value);
 			if (isUp) this.value -= this._scrollSize;
 			else this.value += this._scrollSize;
 		}
@@ -3643,6 +3644,7 @@
 			} else {
 				this.value -= this._lastOffset;
 			}
+			console.log('loop ', this.value);
 		}
 
 		/**@private */
