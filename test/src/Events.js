@@ -1,0 +1,27 @@
+const Events = {
+    gameStart: "gameStart",
+    gameWin: "gameWin",
+    gameFail: "gameFail",
+    tutorialStart: "tutorialStart",
+    stageCar: "stageCar",
+    stageCarMove: "stageCarMove",
+    stageRain: "stageRain",
+    stageElevator: "stageElevator",
+    stageBulgar: "stageBulgar",
+    stageHome: "stageHome",
+    stageBasement: "stageBasement",
+    stageCarEnd: "stageCarEnd",
+    stageCarMoveEnd: "stageCarMoveEnd",
+    stageRainEnd: "stageRainEnd",
+    stageElevatorEnd: "stageElevatorEnd",
+    stageBulgarEnd: "stageBulgarEnd",
+    stageHomeEnd: "stageHomeEnd",
+    stageBasementEnd: "stageBasementEnd",
+    elevatorFall: "elevatorFall",
+    elevatorFallEnd: "elevatorFallEnd",
+    bulgarFall: "bulgarFall",
+    bulgarFallEnd: "bulgarFallEnd",
+    katrinFallEnd: "katrinFallEnd",
+    katrinHomeEnd: "katrinHomeEnd"
+};
+export default Events;
