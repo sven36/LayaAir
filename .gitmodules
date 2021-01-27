@@ -1,0 +1,6 @@
+[submodule "pixi.js"]
+	path = pixi.js
+	url = https://github.com/pixijs/pixi.js.git
+[submodule "spritesheet.js"]
+	path = spritesheet.js
+	url = https://github.com/krzysztof-o/spritesheet.js.git
