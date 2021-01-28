@@ -1,12 +1,10 @@
-
-import * as PIXI from 'pixi.js';
 import PolygonEditPlot from './PolygonEditPlot';
 import CircleEditPlot from './CircleEditPlot';
 
 
-class MaskBehavior {
-    static maskBehavior(behavior) {
-        var data = Object.assign(MaskBehavior._getDefaultMaskData(), this.config.maskData);
+class HitAreaBehavior {
+    static hitAreaBehavior(behavior) {
+        var data = Object.assign(HitAreaBehavior._getDefaultHitAreaData(), this.config.hitAreaData);
         if (data.visible || data.edit)
             switch (data.type) {
                 case "circle":
@@ -15,11 +13,8 @@ class MaskBehavior {
                 case "polygon":
                     this.addChild(new PolygonEditPlot(data))
             }
-        else {
-            var graphics = MaskBehavior._createGraphics(MaskBehavior._createShape(data), data);
-            this.addChild(graphics),
-                this.mask = graphics
-        }
+        else
+            this.hitArea = HitAreaBehavior._createShape(data)
     }
     static _createShape(data) {
         switch (data.type) {
@@ -38,10 +33,9 @@ class MaskBehavior {
             g.drawShape(shape),
             g
     }
-    static _getDefaultMaskData() {
+    static _getDefaultHitAreaData() {
         return {
             visible: !1,
-            edit: !1,
             alpha: .3,
             color: 16711680,
             type: "polygon",
@@ -54,5 +48,4 @@ class MaskBehavior {
         }
     }
 }
-
-export default MaskBehavior;
+export default HitAreaBehavior;
