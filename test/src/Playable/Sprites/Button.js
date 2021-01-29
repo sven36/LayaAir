@@ -1,4 +1,4 @@
-import Sprite from '../Core/Sprite';
+import Sprite from '../Core/Sprite.js';
 
 class Button extends Sprite {
     getDefaultConfig(config) {

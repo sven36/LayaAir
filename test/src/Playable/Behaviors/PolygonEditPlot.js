@@ -1,8 +1,9 @@
-import * as PIXI from 'pixi.js';
+import PIXI from '../../pixi5.2.js';
 
 
 class PolygonEditPlot extends PIXI.Graphics {
     constructor(data) {
+        super();
         this.data = Object.assign(this.getDefaultData(), data);
         this.setupEvents();
         this.position = _this.data.position;
@@ -199,41 +200,4 @@ class PolygonEditPlot extends PIXI.Graphics {
     }
 }
 
-var PolygonEditPlot = function (_PIXI$Graphics) {
-    function PolygonEditPlot(data) {
-        !function (instance, Constructor) {
-            if (!(instance instanceof Constructor))
-                throw new TypeError("Cannot call a class as a function")
-        }(this, PolygonEditPlot);
-        var _this = function (self, call) {
-            if (!self)
-                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-            return !call || "object" != typeof call && "function" != typeof call ? self : call
-        }(this, (PolygonEditPlot.__proto__ || Object.getPrototypeOf(PolygonEditPlot)).call(this));
-        return _this.data = Object.assign(_this.getDefaultData(), data),
-            _this.setupEvents(),
-            _this.position = _this.data.position,
-            _this.interactive = !0,
-            _this.activePoint = null,
-            _this.createLabel(),
-            _this.createPoints(),
-            _this.updatePoints(),
-            _this
-    }
-    return function (subClass, superClass) {
-        if ("function" != typeof superClass && null !== superClass)
-            throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-        subClass.prototype = Object.create(superClass && superClass.prototype, {
-            constructor: {
-                value: subClass,
-                enumerable: !1,
-                writable: !0,
-                configurable: !0
-            }
-        }),
-            superClass && (Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass)
-    }(PolygonEditPlot, PIXI.Graphics),
-        _createClass(PolygonEditPlot, []),
-        PolygonEditPlot
-}();
 export default PolygonEditPlot;

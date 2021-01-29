@@ -1,6 +1,6 @@
-import Sprite from '../../Playable/Core/Sprite';
-import Rewards from '../../Playable/Behaviors/UniversalBehavior/Rewards';
-import Animations from '../../Animations';
+import Sprite from '../../Playable/Core/Sprite.js';
+import Rewards from '../../Playable/Behaviors/UniversalBehavior/Rewards.js';
+import Animations from '../../Animations.js';
 
 class Lock extends Sprite {
     getDefaultConfig(config) {

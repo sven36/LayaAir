@@ -1,7 +1,7 @@
-import * as PIXI from 'pixi.js';
-import BaseAnimations from '../Animations/BaseAnimations';
-import BaseBehaviors from '../Behaviors/BaseBehaviors';
-import Button from './Button';
+import PIXI from '../../pixi5.2.js';
+import BaseAnimations from '../Animations/BaseAnimations.js';
+import BaseBehaviors from '../Behaviors/BaseBehaviors.js';
+import Button from './Button.js';
 
 class ButtonPlay extends Button {
     onShowEnd() {

@@ -1,4 +1,4 @@
-import StagedSprite from '../Playable/Core/StagedSprite';
+import StagedSprite from '../Playable/Core/StagedSprite.js';
 
 class UIContainer extends StagedSprite {
     setStage(stage) {

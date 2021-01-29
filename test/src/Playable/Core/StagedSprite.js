@@ -1,4 +1,4 @@
-import Sprite from './Sprite';
+import Sprite from './Sprite.js';
 
 var _get = function get(object, property, receiver) {
     null === object && (object = Function.prototype);

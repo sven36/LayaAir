@@ -1,8 +1,9 @@
-import * as PIXI from 'pixi.js'
-import Reward from './Reward';
+import PIXI from '../../../pixi5.2.js'
+import Reward from './Reward.js';
 
 class Scenario extends PIXI.utils.EventEmitter {
     constructor(obj, config) {
+        super();
         this.rewards = config.rewards || [];
         this.loop = config.loop || !1;
         this.repeat = config.repeat || 0;

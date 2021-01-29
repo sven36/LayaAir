@@ -1,3 +1,9 @@
+export const viewPortConfig = {
+    "size": [1390, 640],
+    "size_min": [853, 640],
+    "crop": true,
+    "adaptive": true
+}
 
 export let Ease = {
     linear: function () {
@@ -135,9 +141,9 @@ export let Ease = {
         return function (i) {
             var n = void 0;
             return 0 === i ? 0 : 1 === i ? 1 : (n = !t || t < 1 ? (t = 1, e / 4) : e * Math.asin(1 / t) / (2 *
-                Math.PI), (i *= 2) < 1 ? t * Math.pow(2, 10 * (i - 1)) * Math.sin((i - 1 - n) * (2 * Math
+                    Math.PI), (i *= 2) < 1 ? t * Math.pow(2, 10 * (i - 1)) * Math.sin((i - 1 - n) * (2 * Math
                     .PI) / e) * -.5 : t * Math.pow(2, -10 * (i - 1)) * Math.sin((i - 1 - n) * (2 * Math.PI) / e) *
-                    .5 + 1)
+                .5 + 1)
         }
     },
     inBack: function () {
@@ -204,8 +210,8 @@ let util = {
             var sprite = new PIXI.Sprite(texture);
             return sprite.origWidth = texture.origWidth, sprite.origHeight = texture.origHeight, (anchorX ||
                 0 == anchorX) && ("object" == (void 0 === anchorX ? "undefined" : _typeof(anchorX)) ? sprite
-                    .anchor.set(anchorX[0], anchorX[1] || anchorX[0]) : sprite.anchor.set(anchorX, "number" ==
-                        typeof anchorY ? anchorY : anchorX)), sprite
+                .anchor.set(anchorX[0], anchorX[1] || anchorX[0]) : sprite.anchor.set(anchorX, "number" ==
+                    typeof anchorY ? anchorY : anchorX)), sprite
         }
     },
     getBaseTexture: function (name) {
@@ -279,7 +285,7 @@ let util = {
     initFade: function () {
         var color = 0 < arguments.length && void 0 !== arguments[0] && arguments[0],
             fade = new PIXI.Graphics,
-            maxSize = Math.max(config.size[0], config.size[1]),
+            maxSize = Math.max(viewPortConfig.size[0], viewPortConfig.size[1]),
             fill = color ? "0x" + color : "0x000000";
         return fade.beginFill(fill), fade.drawRect(0, 0, maxSize, maxSize), fade.alpha = 0, fade
     },

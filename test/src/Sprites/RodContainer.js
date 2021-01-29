@@ -1,4 +1,4 @@
-import Sprite from '../Playable/Core/Sprite';
+import Sprite from '../Playable/Core/Sprite.js';
 
 class RodContainer extends Sprite {
 

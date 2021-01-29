@@ -1,7 +1,8 @@
-import * as PIXI from 'pixi.js'
+import PIXI from '../../pixi5.2.js'
 
 class Position extends PIXI.Point {
     constructor(data) {
+        super();
         this.data = Object.assign(Position.getDefaultData(), data);
     }
     calculateFor(object) {

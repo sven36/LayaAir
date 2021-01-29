@@ -1,6 +1,6 @@
-import Sprite from '../Playable/Core/Sprite';
-import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards';
-import Animations from '../Animations';
+import Sprite from '../Playable/Core/Sprite.js';
+import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards.js';
+import Animations from '../Animations.js';
 
 export const SpiderEvents = {
     move: "move"
@@ -173,4 +173,5 @@ class Spider extends Sprite {
         })
     }
 }
+Spider.SpiderEvents = SpiderEvents;
 export default Spider;

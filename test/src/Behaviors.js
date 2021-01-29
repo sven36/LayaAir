@@ -1,4 +1,4 @@
-import BaseBehaviors from './Playable/Behaviors/BaseBehaviors'
+import BaseBehaviors from './Playable/Behaviors/BaseBehaviors.js'
 
 class Behaviors extends BaseBehaviors {
 

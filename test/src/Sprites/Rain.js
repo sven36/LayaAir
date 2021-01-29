@@ -1,6 +1,6 @@
-import Sprite from '../Playable/Core/Sprite';
-import Animation from '../Playable/Core/Animation';
-import Animations from '../Animations';
+import Sprite from '../Playable/Core/Sprite.js';
+import Animation from '../Playable/Core/Animation.js';
+import Animations from '../Animations.js';
 
 class Rain extends Sprite {
     setup() {
@@ -122,32 +122,5 @@ class Rain extends Sprite {
         })
     }
 }
-var Rain = function (_Sprite) {
-    function Rain() {
-        return function (instance, Constructor) {
-            if (!(instance instanceof Constructor))
-                throw new TypeError("Cannot call a class as a function")
-        }(this, Rain),
-            function (self, call) {
-                if (!self)
-                    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-                return !call || "object" != typeof call && "function" != typeof call ? self : call
-            }(this, (Rain.__proto__ || Object.getPrototypeOf(Rain)).apply(this, arguments))
-    }
-    return function (subClass, superClass) {
-        if ("function" != typeof superClass && null !== superClass)
-            throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-        subClass.prototype = Object.create(superClass && superClass.prototype, {
-            constructor: {
-                value: subClass,
-                enumerable: !1,
-                writable: !0,
-                configurable: !0
-            }
-        }),
-            superClass && (Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass)
-    }(Rain, _Sprite3.default),
-        _createClass(Rain, []),
-        Rain
-}();
+
 export default Rain;

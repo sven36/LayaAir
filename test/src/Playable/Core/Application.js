@@ -1,11 +1,12 @@
-import BaseApplication from '../../Core/Application';
-import Sprite from './Sprite';
-import Sound from './Sound';
-import ObjectFactory from './ObjectFactory';
-import Analytics from './Analytics';
+import BaseApplication from '../../Core/Application.js';
+import Sprite from './Sprite.js';
+import Sound from './Sound.js';
+import ObjectFactory from './ObjectFactory.js';
+import Analytics from './Analytics.js';
 
 class Application extends BaseApplication {
     constructor(data) {
+        super();
         this.config = Object.assign(this.getDefaultConfig(data.config), data.config);
         this.playableFlags = {};
         this.spriteFactory = new ObjectFactory(Sprite, this);

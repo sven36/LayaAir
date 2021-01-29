@@ -1,15 +1,16 @@
-import * as PIXI from 'pixi.js';
-import Animation from './Animation';
-import Behavior from './Behavior';
-import Position from './Position';
-import Scenario from './UniversalBehavior/Scenario';
-import BaseBehaviors from '../Behaviors/BaseBehaviors';
+import PIXI from '../../pixi5.2.js';
+import Animation from './Animation.js';
+import Behavior from './Behavior.js';
+import Position from './Position.js';
+import Scenario from './UniversalBehavior/Scenario.js';
+import BaseBehaviors from '../Behaviors/BaseBehaviors.js';
 
 class Sprite extends PIXI.Sprite {
     constructor(config, app) {
+        super();
         this.app = app;
         this.config = Object.assign(this.getDefaultConfig(config), config);
-        this.name = _this.config.name;
+        this.name = this.config.name;
         this.setup();
     }
     setup() {

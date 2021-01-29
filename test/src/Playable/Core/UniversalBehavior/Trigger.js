@@ -1,5 +1,5 @@
-import Condition from './Condition';
-import Reward from './Reward';
+import Condition from './Condition.js';
+import Reward from './Reward.js';
 
 class Trigger {
     static setupForAll(obj, triggers, rewards, conditions) {

@@ -1,6 +1,6 @@
-import StagedSprite from '../Playable/Core/StagedSprite';
-import Behavior from '../Playable/Core/Behavior';
-import DraggingBehavior from '../Playable/Behaviors/DraggingBehavior';
+import StagedSprite from '../Playable/Core/StagedSprite.js';
+import Behavior from '../Playable/Core/Behavior.js';
+import DraggingBehavior from '../Playable/Behaviors/DraggingBehavior.js';
 
 class MainContainer extends StagedSprite {
     getEventHandlers() {

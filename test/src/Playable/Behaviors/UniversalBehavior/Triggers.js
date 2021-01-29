@@ -1,4 +1,4 @@
-import Condition from '../../Core/UniversalBehavior/Condition';
+import Condition from '../../Core/UniversalBehavior/Condition.js';
 
 class Triggers {
     static onEvent(event, data) {

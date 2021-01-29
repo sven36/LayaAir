@@ -1,5 +1,5 @@
-import Animation from '../Core/Animation';
-import AnimationTimeline from '../Core/AnimationTimeline';
+import Animation from '../Core/Animation.js';
+import AnimationTimeline from '../Core/AnimationTimeline.js';
 
 class BaseAnimations {
     static alphaScaleShow(config) {

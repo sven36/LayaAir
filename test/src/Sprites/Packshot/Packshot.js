@@ -1,8 +1,8 @@
-import StagedSprite from '../../Playable/Core/StagedSprite';
-import Rewards from '../../Playable/Behaviors/UniversalBehavior/Rewards';
-import Triggers from '../../Playable/Behaviors/UniversalBehavior/Triggers';
-import Animations from '../../Animations';
-import Icon from '../Icon';
+import StagedSprite from '../../Playable/Core/StagedSprite.js';
+import Rewards from '../../Playable/Behaviors/UniversalBehavior/Rewards.js';
+import Triggers from '../../Playable/Behaviors/UniversalBehavior/Triggers.js';
+import Animations from '../../Animations.js';
+import Icon from './Icon.js';
 
 class PackShot extends StagedSprite {
     onShowStart() {

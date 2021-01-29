@@ -1,5 +1,5 @@
-import * as PIXI from 'pixi.js';
-import Animation from './Animation';
+import PIXI from '../../pixi5.2.js';
+import Animation from './Animation.js';
 
 class AnimationTimeline {
     constructor(options) {
@@ -82,4 +82,4 @@ class AnimationTimeline {
     }
 }
 
-export default = AnimationTimeline;
+export default AnimationTimeline;

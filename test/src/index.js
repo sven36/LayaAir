@@ -1,6 +1,8 @@
-import SuperApp from './Core/SuperApp';
-import Application from './Playable/Core/Application';
-import Config from './config';
+
+import './Tween/index.js';
+import SuperApp from './Core/SuperApp.js';
+import Application from './Playable/Core/Application.js';
+import Config from './config.js';
 
 window.RATIO = {
     XLG: 2.15,
@@ -15,3 +17,4 @@ window.RATIO = {
 window.superApp = new SuperApp(Application, {
     config: Config
 });
+superApp.init();

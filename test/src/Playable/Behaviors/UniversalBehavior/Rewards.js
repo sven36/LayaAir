@@ -1,7 +1,7 @@
-import Condition from '../../Core/UniversalBehavior/Condition';
-import Scenario from '../../Core/UniversalBehavior/Scenario';
-import Reward from '../../Core/UniversalBehavior/Reward';
-import Animation from '../../Core/Animation';
+import Condition from '../../Core/UniversalBehavior/Condition.js';
+import Scenario from '../../Core/UniversalBehavior/Scenario.js';
+import Reward from '../../Core/UniversalBehavior/Reward.js';
+import Animation from '../../Core/Animation.js';
 
 class Rewards {
     static emitEvent(event, payload) {

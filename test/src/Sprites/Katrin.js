@@ -1,9 +1,9 @@
-import StagedSprite from '../Playable/Core/StagedSprite';
-import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards';
-import Triggers from '../Playable/Behaviors/UniversalBehavior/Triggers';
-import Animations from '../Animations';
-import Events from '../Events';
-import Drops from './Drops';
+import StagedSprite from '../Playable/Core/StagedSprite.js';
+import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards.js';
+import Triggers from '../Playable/Behaviors/UniversalBehavior/Triggers.js';
+import Animations from '../Animations.js';
+import Events from '../Events.js';
+import Drops from './Drops.js';
 
 
 export let KatrinEvents = {
@@ -87,10 +87,10 @@ class Katrin extends StagedSprite {
                     t: Triggers.onEvent(KatrinEvents.stop),
                     r: Rewards.startScenario("stopWalk")
                 }, {
-                    t: Triggers.onEvent(_Events.Events.stageCarMove),
+                    t: Triggers.onEvent(Events.stageCarMove),
                     r: Rewards.startScenario("wet")
                 }, {
-                    t: Triggers.onEvent(_Events.Events.stageRainEnd),
+                    t: Triggers.onEvent(Events.stageRainEnd),
                     r: Rewards.startScenario("rain")
                 }, {
                     t: Triggers.onEvent(KatrinEvents.sadSmile),
@@ -657,7 +657,7 @@ class Katrin extends StagedSprite {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageCarMove),
+                            t: Triggers.onEvent(Events.stageCarMove),
                             r: Rewards.show()
                         }, {
                             t: Triggers.onAnimationEnd("show"),
@@ -687,7 +687,7 @@ class Katrin extends StagedSprite {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageCarMove),
+                            t: Triggers.onEvent(Events.stageCarMove),
                             r: Rewards.show()
                         }, {
                             t: Triggers.onAnimationEnd("show"),
@@ -742,7 +742,7 @@ class Katrin extends StagedSprite {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageCarMove),
+                            t: Triggers.onEvent(Events.stageCarMove),
                             r: Rewards.show()
                         }, {
                             t: Triggers.onAnimationEnd("show"),
@@ -784,19 +784,19 @@ class Katrin extends StagedSprite {
                     t: Triggers.onEvent(KatrinEvents.stop),
                     r: Rewards.startScenario("stopWalk")
                 }, {
-                    t: Triggers.onEvent(_Events.Events.stageElevatorEnd),
+                    t: Triggers.onEvent(Events.stageElevatorEnd),
                     r: Rewards.startScenario("elevator")
                 }, {
-                    t: Triggers.onEvent(_Events.Events.elevatorFall),
+                    t: Triggers.onEvent(Events.elevatorFall),
                     r: Rewards.startScenario("happy")
                 }, {
-                    t: Triggers.onEvent(_Events.Events.stageBulgarEnd),
+                    t: Triggers.onEvent(Events.stageBulgarEnd),
                     r: Rewards.startScenario("bulgar")
                 }, {
-                    t: Triggers.onEvent(_Events.Events.stageBasementEnd),
+                    t: Triggers.onEvent(Events.stageBasementEnd),
                     r: Rewards.startScenario("scare")
                 }, {
-                    t: [Triggers.onEvent(_Events.Events.stageHome), Triggers.onEvent(KatrinEvents.happy)],
+                    t: [Triggers.onEvent(Events.stageHome), Triggers.onEvent(KatrinEvents.happy)],
                     r: [Rewards.resetScenario("happy"), Rewards.startScenario("happy")]
                 }],
                 animations: {

@@ -1,9 +1,9 @@
-import StagedSprite from '../Playable/Core/StagedSprite';
-import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards';
-import Triggers from '../Playable/Behaviors/UniversalBehavior/Triggers';
-import Conditions from '../Playable/Behaviors/UniversalBehavior/Conditions';
-import HitAreaBehavior from '../Playable/Behaviors/HitAreaBehavior';
-import Animations from '../Animations';
+import StagedSprite from '../Playable/Core/StagedSprite.js';
+import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards.js';
+import Triggers from '../Playable/Behaviors/UniversalBehavior/Triggers.js';
+import Conditions from '../Playable/Behaviors/UniversalBehavior/Conditions.js';
+import HitAreaBehavior from '../Playable/Behaviors/HitAreaBehavior.js';
+import Animations from '../Animations.js';
 
 export const RodEvents = {
     rodTouch: "rodTouch",
@@ -22,35 +22,35 @@ class Rod extends StagedSprite {
             this.setStage("normal")
     }
     getDefaultConfig(config) {
-        var _this2 = this
-            , name = config.name
-            , image = config.image
-            , _config$onOpenHide = config.onOpenHide
-            , onOpenHide = void 0 === _config$onOpenHide || _config$onOpenHide
-            , _config$blockedBy = config.blockedBy
-            , blockedBy = void 0 === _config$blockedBy ? null : _config$blockedBy
-            , _config$hitAreaData = config.hitAreaData
-            , hitAreaData = void 0 === _config$hitAreaData ? {} : _config$hitAreaData
-            , _config$blockRotation = config.blockRotation
-            , blockRotation = void 0 === _config$blockRotation ? -.1 : _config$blockRotation
-            , _config$openRotation = config.openRotation
-            , openRotation = void 0 === _config$openRotation ? -Math.PI / 2 : _config$openRotation;
+        var _this2 = this,
+            name = config.name,
+            image = config.image,
+            _config$onOpenHide = config.onOpenHide,
+            onOpenHide = void 0 === _config$onOpenHide || _config$onOpenHide,
+            _config$blockedBy = config.blockedBy,
+            blockedBy = void 0 === _config$blockedBy ? null : _config$blockedBy,
+            _config$hitAreaData = config.hitAreaData,
+            hitAreaData = void 0 === _config$hitAreaData ? {} : _config$hitAreaData,
+            _config$blockRotation = config.blockRotation,
+            blockRotation = void 0 === _config$blockRotation ? -.1 : _config$blockRotation,
+            _config$openRotation = config.openRotation,
+            openRotation = void 0 === _config$openRotation ? -Math.PI / 2 : _config$openRotation;
         config.image = null;
         this.swivel = config.swivel || !1,
             this.onOpenHide = onOpenHide,
             this.blockedBy = blockedBy;
-        var _config$position_open = config.position_open
-            , position_open = void 0 === _config$position_open ? {
+        var _config$position_open = config.position_open,
+            position_open = void 0 === _config$position_open ? {
                 x: -150,
                 y: 0
-            } : _config$position_open
-            , _config$position_hint = config.position_hint
-            , position_hint = void 0 === _config$position_hint ? {
+            } : _config$position_open,
+            _config$position_hint = config.position_hint,
+            position_hint = void 0 === _config$position_hint ? {
                 x: -30,
                 y: 0
-            } : _config$position_hint
-            , _config$position_bloc = config.position_block
-            , position_block = void 0 === _config$position_bloc ? {
+            } : _config$position_hint,
+            _config$position_bloc = config.position_block,
+            position_block = void 0 === _config$position_bloc ? {
                 x: -10,
                 y: 0
             } : _config$position_bloc;
@@ -239,4 +239,5 @@ class Rod extends StagedSprite {
         })
     }
 }
+Rod.RodEvents = RodEvents;
 export default Rod;

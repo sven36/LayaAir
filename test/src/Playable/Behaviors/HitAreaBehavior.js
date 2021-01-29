@@ -1,5 +1,5 @@
-import PolygonEditPlot from './PolygonEditPlot';
-import CircleEditPlot from './CircleEditPlot';
+import PolygonEditPlot from './PolygonEditPlot.js';
+import CircleEditPlot from './CircleEditPlot.js';
 
 
 class HitAreaBehavior {

@@ -1,4 +1,4 @@
-import * as PIXI from 'pixi.js';
+import PIXI from '../../pixi5.2.js';
 
 
 class Animation {

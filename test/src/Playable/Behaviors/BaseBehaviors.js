@@ -1,4 +1,4 @@
-import Trigger from '../Core/UniversalBehavior/Trigger';
+import Trigger from '../Core/UniversalBehavior/Trigger.js';
 
 
 class BaseBehaviors {

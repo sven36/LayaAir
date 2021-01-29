@@ -1,5 +1,5 @@
-import Sprite from '../Core/Sprite';
-import BaseAnimations from '../Animations/BaseAnimations';
+import Sprite from '../Core/Sprite.js';
+import BaseAnimations from '../Animations/BaseAnimations.js';
 
 
 class Disclaimer extends Sprite {

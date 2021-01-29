@@ -1,7 +1,7 @@
-import Sprite from '../Playable/Core/Sprite';
-import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards';
-import Triggers from '../Playable/Behaviors/UniversalBehavior/Triggers';
-import Animations from '../Animations';
+import Sprite from '../Playable/Core/Sprite.js';
+import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards.js';
+import Triggers from '../Playable/Behaviors/UniversalBehavior/Triggers.js';
+import Animations from '../Animations.js';
 var _get = function get(object, property, receiver) {
     null === object && (object = Function.prototype);
     var desc = Object.getOwnPropertyDescriptor(object, property);

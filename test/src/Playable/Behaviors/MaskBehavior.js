@@ -1,7 +1,7 @@
 
-import * as PIXI from 'pixi.js';
-import PolygonEditPlot from './PolygonEditPlot';
-import CircleEditPlot from './CircleEditPlot';
+import PIXI from '../../pixi5.2.js';
+import PolygonEditPlot from './PolygonEditPlot.js';
+import CircleEditPlot from './CircleEditPlot.js';
 
 
 class MaskBehavior {

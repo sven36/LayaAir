@@ -1,7 +1,8 @@
-import Behavior from '../Core/Behavior';
+import Behavior from '../Core/Behavior.js';
 
 class DraggingBehavior extends Behavior {
     constructor(target, config) {
+        super();
         this.target.interactive = !0;
         this.offsetDependent = config.offsetDependent;
         this.data = null;

@@ -1,9 +1,10 @@
-import * as PIXI from 'pixi.js';
-import Animation from '../Core/Animation';
+import PIXI from '../../pixi5.2.js';
+import Animation from '../Core/Animation.js';
 
 
 class Confetti extends PIXI.Graphics {
     constructor(config, app) {
+        super();
         this.app = app;
         this.name = config.name;
         this.init();

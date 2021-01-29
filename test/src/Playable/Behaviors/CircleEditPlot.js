@@ -1,7 +1,8 @@
-import * as PIXI from 'pixi.js';
+import PIXI from '../../pixi5.2.js';
 
 class CircleEditPlot extends PIXI.Graphics {
     constructor(data) {
+        super();
         this.data = Object.assign(this.getDefaultData(), data);
         this.setupEvents();
         this.interactive = !0;

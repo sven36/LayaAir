@@ -1,4 +1,4 @@
-import Sprite from '../Playable/Core/Sprite';
+import Sprite from '../Playable/Core/Sprite.js';
 
 class TilingSprite extends Sprite {
     setup() {
@@ -32,7 +32,6 @@ class TilingSprite extends Sprite {
             this.tilingSprite.tileTransform.rotation = tileRotation,
             this.tilingSprite.tileTransform.pivot = tilePivot
     }
-    key: "getDefaultConfig",
     getDefaultConfig(config) {
         var image = config.image;
         return config.image = null,

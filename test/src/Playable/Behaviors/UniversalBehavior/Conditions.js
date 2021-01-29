@@ -1,4 +1,4 @@
-import Condition from '../../Core/UniversalBehavior/Condition';
+import Condition from '../../Core/UniversalBehavior/Condition.js';
 
 class Conditions {
     static visible() {
@@ -46,14 +46,5 @@ class Conditions {
     }
 
 }
-var Conditions = function () {
-    function Conditions() {
-        !function (instance, Constructor) {
-            if (!(instance instanceof Constructor))
-                throw new TypeError("Cannot call a class as a function")
-        }(this, Conditions)
-    }
-    return _createClass(Conditions, null, [}]),
-    Conditions
-}();
+
 export default Conditions;

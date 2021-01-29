@@ -1,9 +1,9 @@
-import StagedSprite from '../Playable/Core/StagedSprite';
-import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards';
-import Triggers from '../Playable/Behaviors/UniversalBehavior/Triggers';
-import Conditions from '../Playable/Behaviors/UniversalBehavior/Conditions';
-import Animations from '../Animations';
-import Events from '../Events';
+import StagedSprite from '../Playable/Core/StagedSprite.js';
+import Rewards from '../Playable/Behaviors/UniversalBehavior/Rewards.js';
+import Triggers from '../Playable/Behaviors/UniversalBehavior/Triggers.js';
+import Conditions from '../Playable/Behaviors/UniversalBehavior/Conditions.js';
+import Animations from '../Animations.js';
+import Events from '../Events.js';
 
 export const BulgarEvents = {
     hit: "hit",

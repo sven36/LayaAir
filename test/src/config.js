@@ -1,24 +1,24 @@
-import * as PIXI from 'pixi.js';
-import Animations from './Animations';
-import Events from './Events';
-import MaskBehavior from './Playable/Behaviors/MaskBehavior';
-import Conditions from './Playable/Behaviors/UniversalBehavior/Conditions';
-import Rewards from './Playable/Behaviors/UniversalBehavior/Rewards';
-import Triggers from './Playable/Behaviors/UniversalBehavior/Triggers';
-import ButtonMute from './Playable/Sprites/ButtonMute';
-import Disclaimer from './Playable/Sprites/Disclaimer';
-import Fade from './Playable/Sprites/Fade';
-import Bulgar from './Sprites/Bulgar';
-import Drops from './Sprites/Drops';
-import Katrin from './Sprites/Katrin';
-import MainContainer from './Sprites/MainContainer';
-import Packshot from './Sprites/Packshot/Packshot';
-import Rain from './Sprites/Rain';
-import Rod from './Sprites/Rod';
-import RodContainer from './Sprites/RodContainer';
-import Spider from './Sprites/Spider';
-import TilingSprite from './Sprites/TilingSprite';
-import UIContainer from './Sprites/UIContainer';
+import PIXI from '../src/pixi5.2.js';
+import Animations from './Animations.js';
+import Events from './Events.js';
+import MaskBehavior from './Playable/Behaviors/MaskBehavior.js';
+import Conditions from './Playable/Behaviors/UniversalBehavior/Conditions.js';
+import Rewards from './Playable/Behaviors/UniversalBehavior/Rewards.js';
+import Triggers from './Playable/Behaviors/UniversalBehavior/Triggers.js';
+import ButtonMute from './Playable/Sprites/ButtonMute.js';
+import Disclaimer from './Playable/Sprites/Disclaimer.js';
+import Fade from './Playable/Sprites/Fade.js';
+import Bulgar from './Sprites/Bulgar.js';
+import Drops from './Sprites/Drops.js';
+import Katrin from './Sprites/Katrin.js';
+import MainContainer from './Sprites/MainContainer.js';
+import Packshot from './Sprites/Packshot/Packshot.js';
+import Rain from './Sprites/Rain.js';
+import Rod from './Sprites/Rod.js';
+import RodContainer from './Sprites/RodContainer.js';
+import Spider from './Sprites/Spider.js';
+import TilingSprite from './Sprites/TilingSprite.js';
+import UIContainer from './Sprites/UIContainer.js';
 
 var TILES_floor_line_y = 855
     , TILES_earth_w = 5500
@@ -49,15 +49,15 @@ const config = {
         name: "controller",
         scenarios: {
             beginning: [Rewards.wait(1e3), Rewards.instant(Rewards.startScenario("rainSound")), Rewards.startScenario("car")],
-            car: [Rewards.emitEvent(_Events.Events.stageCar)],
-            carMove: [Rewards.wait(500), Rewards.emitEvent(_Events.Events.stageCarMove)],
-            rain: [Rewards.emitEvent(_Events.Events.stageRain), Rewards.playSound("thunder")],
-            elevator: [Rewards.wait(500), Rewards.startScenario("rainSoundStop"), Rewards.emitEvent(_Events.Events.stageElevator)],
-            elevatorFall: [Rewards.emitEvent(_Events.Events.elevatorFall)],
-            bulgar: [Rewards.wait(500), Rewards.emitEvent(_Events.Events.stageBulgar)],
-            home: [Rewards.wait(500), Rewards.emitEvent(_Events.Events.stageHome)],
-            basement: [Rewards.emitEvent(_Events.Events.stageBasement)],
-            finalFail: [Rewards.wait(2e3), Rewards.emitEvent(_Events.Events.gameFail)],
+            car: [Rewards.emitEvent(Events.stageCar)],
+            carMove: [Rewards.wait(500), Rewards.emitEvent(Events.stageCarMove)],
+            rain: [Rewards.emitEvent(Events.stageRain), Rewards.playSound("thunder")],
+            elevator: [Rewards.wait(500), Rewards.startScenario("rainSoundStop"), Rewards.emitEvent(Events.stageElevator)],
+            elevatorFall: [Rewards.emitEvent(Events.elevatorFall)],
+            bulgar: [Rewards.wait(500), Rewards.emitEvent(Events.stageBulgar)],
+            home: [Rewards.wait(500), Rewards.emitEvent(Events.stageHome)],
+            basement: [Rewards.emitEvent(Events.stageBasement)],
+            finalFail: [Rewards.wait(2e3), Rewards.emitEvent(Events.gameFail)],
             rainSoundStop: [Rewards.stopScenario("rainSound"), Rewards.stopSound("rain")],
             rainSound: {
                 rewards: [Rewards.stopSound("rain"), Rewards.playSound("rain", {
@@ -76,28 +76,28 @@ const config = {
             t: Triggers.onStart(),
             r: Rewards.startScenario("beginning")
         }, {
-            t: Triggers.onEvent(_Events.Events.stageCarEnd),
+            t: Triggers.onEvent(Events.stageCarEnd),
             r: Rewards.startScenario("carMove")
         }, {
-            t: Triggers.onEvent(_Events.Events.stageCarMoveEnd),
+            t: Triggers.onEvent(Events.stageCarMoveEnd),
             r: Rewards.startScenario("rain")
         }, {
-            t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+            t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                 name: RODS_rod2
             }),
             r: Rewards.startScenario("elevator")
         }, {
-            t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+            t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                 name: RODS_rod3
             }),
             r: Rewards.startScenario("elevatorFall")
         }, {
-            t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+            t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                 name: RODS_rod4
             }),
             r: Rewards.startScenario("bulgar")
         }, {
-            t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+            t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                 name: RODS_rod7
             }),
             c: Conditions.flags({
@@ -105,7 +105,7 @@ const config = {
             }),
             r: Rewards.startScenario("home")
         }, {
-            t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+            t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                 name: RODS_rod5
             }),
             c: Conditions.flags({
@@ -113,18 +113,18 @@ const config = {
             }),
             r: Rewards.startScenario("basement")
         }, {
-            t: Triggers.onEvent(_Events.Events.bulgarFallEnd),
+            t: Triggers.onEvent(Events.bulgarFallEnd),
             r: [Rewards.setFlags({
                 basementBulgar: !0
             }), Rewards.if(Conditions.flags({
                 basementKatrin: !0
             }), Rewards.startScenario("finalFail"), [])]
         }, {
-            t: Triggers.onEvent(_Events.Events.katrinFallEnd),
-            r: [Rewards.emitEvent(_Events.Events.stageBasementEnd), Rewards.startScenario("finalFail")]
+            t: Triggers.onEvent(Events.katrinFallEnd),
+            r: [Rewards.emitEvent(Events.stageBasementEnd), Rewards.startScenario("finalFail")]
         }, {
-            t: Triggers.onEvent(_Events.Events.katrinHomeEnd),
-            r: Rewards.emitEvent(_Events.Events.gameWin)
+            t: Triggers.onEvent(Events.katrinHomeEnd),
+            r: Rewards.emitEvent(Events.gameWin)
         }, {
             t: Triggers.onceSkip(),
             r: Rewards.startScenario("rainSoundStop")
@@ -201,30 +201,30 @@ const config = {
                 }
             },
             scenarios: {
-                car: [Rewards.startAnimation("moveCar"), Rewards.emitEvent(_Events.Events.stageCarEnd)],
-                rain: [Rewards.startAnimation("moveRain"), Rewards.emitEvent(_Events.Events.stageRainEnd)],
-                elevator: [Rewards.startAnimation("moveElevator"), Rewards.emitEvent(_Events.Events.stageElevatorEnd)],
-                bulgar: [Rewards.startAnimation("moveBulgar"), Rewards.playSound("bandit"), Rewards.emitEvent(_Events.Events.stageBulgarEnd)],
-                home: [Rewards.startAnimation("moveHome"), Rewards.emitEvent(_Events.Events.stageHomeEnd)],
-                basement: [Rewards.startAnimation("moveBasement"), Rewards.emitEvent(_Events.Events.katrinFallEnd)]
+                car: [Rewards.startAnimation("moveCar"), Rewards.emitEvent(Events.stageCarEnd)],
+                rain: [Rewards.startAnimation("moveRain"), Rewards.emitEvent(Events.stageRainEnd)],
+                elevator: [Rewards.startAnimation("moveElevator"), Rewards.emitEvent(Events.stageElevatorEnd)],
+                bulgar: [Rewards.startAnimation("moveBulgar"), Rewards.playSound("bandit"), Rewards.emitEvent(Events.stageBulgarEnd)],
+                home: [Rewards.startAnimation("moveHome"), Rewards.emitEvent(Events.stageHomeEnd)],
+                basement: [Rewards.startAnimation("moveBasement"), Rewards.emitEvent(Events.katrinFallEnd)]
             },
             on: [{
-                t: Triggers.onEvent(_Events.Events.stageCar),
+                t: Triggers.onEvent(Events.stageCar),
                 r: Rewards.startScenario("car")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageRain),
+                t: Triggers.onEvent(Events.stageRain),
                 r: Rewards.startScenario("rain")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageElevator),
+                t: Triggers.onEvent(Events.stageElevator),
                 r: Rewards.startScenario("elevator")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageBulgar),
+                t: Triggers.onEvent(Events.stageBulgar),
                 r: Rewards.startScenario("bulgar")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageHome),
+                t: Triggers.onEvent(Events.stageHome),
                 r: Rewards.startScenario("home")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageBasement),
+                t: Triggers.onEvent(Events.stageBasement),
                 r: Rewards.startScenario("basement")
             }],
             sprites: [{
@@ -240,7 +240,7 @@ const config = {
                 },
                 width: 1800,
                 on: [{
-                    t: [Triggers.onEvent(_Events.Events.stageElevatorEnd), Triggers.onceSkip()],
+                    t: [Triggers.onEvent(Events.stageElevatorEnd), Triggers.onceSkip()],
                     r: Rewards.hide()
                 }]
             }, {
@@ -335,7 +335,7 @@ const config = {
                             t: Triggers.onStart(),
                             r: [Rewards.startAnimation("idle"), Rewards.startAnimation("idleScale")]
                         }, {
-                            t: Triggers.onEvent(_Events.Events.stageElevatorEnd),
+                            t: Triggers.onEvent(Events.stageElevatorEnd),
                             r: [Rewards.stopAnimation("idle"), Rewards.stopAnimation("idleScale")]
                         }]
                     }, {
@@ -377,7 +377,7 @@ const config = {
                             t: Triggers.onStart(),
                             r: [Rewards.startAnimation("idle"), Rewards.startAnimation("idleScale")]
                         }, {
-                            t: Triggers.onEvent(_Events.Events.stageElevatorEnd),
+                            t: Triggers.onEvent(Events.stageElevatorEnd),
                             r: [Rewards.stopAnimation("idle"), Rewards.stopAnimation("idleScale")]
                         }]
                     }]
@@ -434,7 +434,7 @@ const config = {
                     time: 400
                 },
                 on: [{
-                    t: Triggers.onEvent(_Events.Events.stageElevatorEnd),
+                    t: Triggers.onEvent(Events.stageElevatorEnd),
                     r: Rewards.hide()
                 }, {
                     t: Triggers.onStart(),
@@ -562,7 +562,7 @@ const config = {
                         }
                     },
                     on: [{
-                        t: Triggers.onEvent(_Spider.SpiderEvents.move),
+                        t: Triggers.onEvent(Spider.SpiderEvents.move),
                         r: Rewards.startAnimation("move")
                     }]
                 }, {
@@ -581,10 +581,10 @@ const config = {
                         y: 1820
                     },
                     on: [{
-                        t: Triggers.onEvent(_Events.Events.stageElevatorEnd),
+                        t: Triggers.onEvent(Events.stageElevatorEnd),
                         r: Rewards.call("move")
                     }, {
-                        t: Triggers.onEvent(_Events.Events.elevatorFall),
+                        t: Triggers.onEvent(Events.elevatorFall),
                         r: Rewards.call("fall")
                     }]
                 }, {
@@ -607,11 +607,11 @@ const config = {
                         }
                     },
                     on: [{
-                        t: Triggers.onEvent(_Events.Events.elevatorFall),
+                        t: Triggers.onEvent(Events.elevatorFall),
                         r: Rewards.startAnimation("fall")
                     }, {
                         t: Triggers.onAnimationEnd("fall"),
-                        r: Rewards.emitEvent(_Events.Events.elevatorFallEnd)
+                        r: Rewards.emitEvent(Events.elevatorFallEnd)
                     }]
                 }, {
                     name: "shadow",
@@ -667,21 +667,21 @@ const config = {
                         }
                     },
                     on: [{
-                        t: Triggers.onEvent(_Rod.RodEvents.rodBlocked, {
+                        t: Triggers.onEvent(Rod.RodEvents.rodBlocked, {
                             name: RODS_rod7
                         }),
                         r: Rewards.call("smack")
                     }, {
-                        t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+                        t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                             name: RODS_rod6
                         }),
                         r: Rewards.call("fall")
                     }, {
                         t: Triggers.onAnimationStart("fall"),
-                        r: Rewards.emitEvent(_Events.Events.bulgarFall)
+                        r: Rewards.emitEvent(Events.bulgarFall)
                     }, {
                         t: Triggers.onAnimationEnd("fall"),
-                        r: Rewards.emitEvent(_Events.Events.bulgarFallEnd)
+                        r: Rewards.emitEvent(Events.bulgarFallEnd)
                     }]
                 }, {
                     name: "fell",
@@ -691,7 +691,7 @@ const config = {
                     },
                     visible: !1,
                     on: [{
-                        t: Triggers.onEvent(_Events.Events.stageBasementEnd),
+                        t: Triggers.onEvent(Events.stageBasementEnd),
                         r: Rewards.show()
                     }],
                     sprites: [{
@@ -731,7 +731,7 @@ const config = {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageBasementEnd),
+                            t: Triggers.onEvent(Events.stageBasementEnd),
                             r: [Rewards.startAnimation("idle"), Rewards.startAnimation("idleRotate")]
                         }]
                     }, {
@@ -758,7 +758,7 @@ const config = {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageBasementEnd),
+                            t: Triggers.onEvent(Events.stageBasementEnd),
                             r: Rewards.show()
                         }, {
                             t: Triggers.onAnimationEnd("show"),
@@ -788,7 +788,7 @@ const config = {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageBasementEnd),
+                            t: Triggers.onEvent(Events.stageBasementEnd),
                             r: Rewards.show()
                         }, {
                             t: Triggers.onAnimationEnd("show"),
@@ -826,7 +826,7 @@ const config = {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageBasement),
+                            t: Triggers.onEvent(Events.stageBasement),
                             r: Rewards.show()
                         }, {
                             t: Triggers.onAnimationEnd("show"),
@@ -852,7 +852,7 @@ const config = {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.bulgarFall),
+                            t: Triggers.onEvent(Events.bulgarFall),
                             r: Rewards.show()
                         }, {
                             t: Triggers.onAnimationEnd("show"),
@@ -886,7 +886,7 @@ const config = {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageElevatorEnd),
+                            t: Triggers.onEvent(Events.stageElevatorEnd),
                             r: [Rewards.startAnimation("idle")]
                         }]
                     }, {
@@ -925,7 +925,7 @@ const config = {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageElevatorEnd),
+                            t: Triggers.onEvent(Events.stageElevatorEnd),
                             r: [Rewards.startAnimation("idle"), Rewards.startAnimation("idleScale")]
                         }]
                     }, {
@@ -964,7 +964,7 @@ const config = {
                             }
                         },
                         on: [{
-                            t: Triggers.onEvent(_Events.Events.stageElevatorEnd),
+                            t: Triggers.onEvent(Events.stageElevatorEnd),
                             r: [Rewards.startAnimation("idle"), Rewards.startAnimation("idleScale")]
                         }]
                     }]
@@ -1056,10 +1056,10 @@ const config = {
                         t: Triggers.onStart(),
                         r: Rewards.lock()
                     }, {
-                        t: Triggers.onEvent(_Events.Events.stageRainEnd),
+                        t: Triggers.onEvent(Events.stageRainEnd),
                         r: Rewards.unlock()
                     }, {
-                        t: Triggers.onEvent(_Rod.RodEvents.rodOpened, {
+                        t: Triggers.onEvent(Rod.RodEvents.rodOpened, {
                             name: RODS_rod1
                         }),
                         r: Rewards.unlock()
@@ -1097,7 +1097,7 @@ const config = {
                                 t: Triggers.onStart(),
                                 r: Rewards.show()
                             }, {
-                                t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+                                t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                                     name: RODS_rod1
                                 }),
                                 r: Rewards.hide()
@@ -1123,7 +1123,7 @@ const config = {
                                 t: Triggers.onStart(),
                                 r: Rewards.show()
                             }, {
-                                t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+                                t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                                     name: RODS_rod1
                                 }),
                                 r: Rewards.hide()
@@ -1191,15 +1191,15 @@ const config = {
                             },
                             scenarios: {
                                 hint: {
-                                    rewards: [Rewards.show(), Rewards.startAnimation("showAlpha"), Rewards.emitEvent(_Events.Events.tutorialStart), Rewards.startAnimation("hint"), Rewards.hide(), Rewards.startAnimation("hideAlpha")],
+                                    rewards: [Rewards.show(), Rewards.startAnimation("showAlpha"), Rewards.emitEvent(Events.tutorialStart), Rewards.startAnimation("hint"), Rewards.hide(), Rewards.startAnimation("hideAlpha")],
                                     loop: !0
                                 }
                             },
                             on: [{
-                                t: Triggers.onEvent(_Events.Events.stageRainEnd),
+                                t: Triggers.onEvent(Events.stageRainEnd),
                                 r: Rewards.startScenario("hint")
                             }, {
-                                t: Triggers.onEvent(_Rod.RodEvents.rodTouch),
+                                t: Triggers.onEvent(Rod.RodEvents.rodTouch),
                                 r: [Rewards.stopScenario("hint"), Rewards.stopAnimation("hint"), Rewards.call("hardHide")]
                             }]
                         }]
@@ -1221,10 +1221,10 @@ const config = {
                         t: Triggers.onStart(),
                         r: Rewards.lock()
                     }, {
-                        t: Triggers.onEvent(_Events.Events.stageRainEnd),
+                        t: Triggers.onEvent(Events.stageRainEnd),
                         r: Rewards.unlock()
                     }, {
-                        t: Triggers.onEvent(_Events.Events.tutorialStart),
+                        t: Triggers.onEvent(Events.tutorialStart),
                         r: [Rewards.startAnimation("hint"), Rewards.setStage("hint")]
                     }]
                 }, {
@@ -1244,9 +1244,9 @@ const config = {
                     },
                     on: [{
                         t: Triggers.onStart(),
-                        r: [Rewards.emitEvent(_Rod.RodEvents.rodPartStart), Rewards.lock()]
+                        r: [Rewards.emitEvent(Rod.RodEvents.rodPartStart), Rewards.lock()]
                     }, {
-                        t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+                        t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                             name: RODS_rod2
                         }),
                         r: Rewards.call("hardHide")
@@ -1278,7 +1278,7 @@ const config = {
                         t: Triggers.onStart(),
                         r: Rewards.lock()
                     }, {
-                        t: [Triggers.onEvent(_Events.Events.stageElevatorEnd), Triggers.onEvent(_Rod.RodEvents.rodOpened, {
+                        t: [Triggers.onEvent(Events.stageElevatorEnd), Triggers.onEvent(Rod.RodEvents.rodOpened, {
                             name: RODS_rod3
                         })],
                         r: Rewards.unlock()
@@ -1308,7 +1308,7 @@ const config = {
                         t: Triggers.onStart(),
                         r: Rewards.lock()
                     }, {
-                        t: [Triggers.onEvent(_Events.Events.stageElevatorEnd)],
+                        t: [Triggers.onEvent(Events.stageElevatorEnd)],
                         r: Rewards.unlock()
                     }]
                 }, {
@@ -1328,9 +1328,9 @@ const config = {
                     },
                     on: [{
                         t: Triggers.onStart(),
-                        r: [Rewards.emitEvent(_Rod.RodEvents.rodPartStart), Rewards.lock()]
+                        r: [Rewards.emitEvent(Rod.RodEvents.rodPartStart), Rewards.lock()]
                     }, {
-                        t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+                        t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                             name: RODS_rod4
                         }),
                         r: Rewards.call("hardHide")
@@ -1366,7 +1366,7 @@ const config = {
                         t: Triggers.onStart(),
                         r: Rewards.lock()
                     }, {
-                        t: [Triggers.onEvent(_Events.Events.stageBulgarEnd), Triggers.onEvent(_Rod.RodEvents.rodOpened, {
+                        t: [Triggers.onEvent(Events.stageBulgarEnd), Triggers.onEvent(Rod.RodEvents.rodOpened, {
                             name: RODS_rod6
                         })],
                         r: Rewards.unlock()
@@ -1397,7 +1397,7 @@ const config = {
                         t: Triggers.onStart(),
                         r: Rewards.lock()
                     }, {
-                        t: [Triggers.onEvent(_Events.Events.stageBulgarEnd)],
+                        t: [Triggers.onEvent(Events.stageBulgarEnd)],
                         r: Rewards.unlock()
                     }]
                 }, {
@@ -1439,7 +1439,7 @@ const config = {
                         t: Triggers.onStart(),
                         r: Rewards.lock()
                     }, {
-                        t: [Triggers.onEvent(_Events.Events.stageBulgarEnd), Triggers.onEvent(_Rod.RodEvents.rodOpened, {
+                        t: [Triggers.onEvent(Events.stageBulgarEnd), Triggers.onEvent(Rod.RodEvents.rodOpened, {
                             name: RODS_rod6
                         })],
                         r: Rewards.unlock()
@@ -1534,13 +1534,13 @@ const config = {
                 },
                 scenarios: {
                     open: [Rewards.instant(Rewards.startAnimation("shake")), Rewards.wait(500), Rewards.startAnimation("open"), Rewards.wait(500), Rewards.startAnimation("close")],
-                    carMove: [Rewards.hide(), Rewards.instant(Rewards.startAnimation("wheels")), Rewards.wait(1e3), Rewards.emitEvent(_Events.Events.stageCarMoveEnd)]
+                    carMove: [Rewards.hide(), Rewards.instant(Rewards.startAnimation("wheels")), Rewards.wait(1e3), Rewards.emitEvent(Events.stageCarMoveEnd)]
                 },
                 on: [{
                     t: Triggers.onStart(),
                     r: Rewards.startScenario("open")
                 }, {
-                    t: Triggers.onEvent(_Events.Events.stageCarMove),
+                    t: Triggers.onEvent(Events.stageCarMove),
                     r: Rewards.startScenario("carMove")
                 }],
                 sprites: [{
@@ -1659,48 +1659,48 @@ const config = {
                 jumpOnEnter: [Rewards.wait(200), Rewards.startAnimation("jump"), Rewards.wait(260), Rewards.startAnimation("jump")],
                 jumpOnBasement: [Rewards.wait(1700), Rewards.startAnimation("jump")],
                 jumpOnHome: [Rewards.wait(580), Rewards.startAnimation("jump")],
-                moveHome: [Rewards.instant(Rewards.startAnimation("moveHome")), Rewards.wait(200), Rewards.startAnimation("jump"), Rewards.emitEvent(_Events.Events.katrinHomeEnd)]
+                moveHome: [Rewards.instant(Rewards.startAnimation("moveHome")), Rewards.wait(200), Rewards.startAnimation("jump"), Rewards.emitEvent(Events.katrinHomeEnd)]
             },
             on: [{
                 t: Triggers.onStart(),
                 r: Rewards.startScenario("exitCar")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageRain),
+                t: Triggers.onEvent(Events.stageRain),
                 r: Rewards.startAnimation("moveBack")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageElevator),
+                t: Triggers.onEvent(Events.stageElevator),
                 r: [Rewards.call("enterHouse"), Rewards.startScenario("jumpOnEnter")]
             }, {
-                t: Triggers.onEvent(_Events.Events.stageBulgar),
+                t: Triggers.onEvent(Events.stageBulgar),
                 r: [Rewards.startAnimation("moveBulgar"), Rewards.startScenario("jumpOnBasement")]
             }, {
-                t: Triggers.onEvent(_Events.Events.stageHome),
+                t: Triggers.onEvent(Events.stageHome),
                 r: Rewards.startScenario("jumpOnHome")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageHomeEnd),
+                t: Triggers.onEvent(Events.stageHomeEnd),
                 r: Rewards.startScenario("moveHome")
             }, {
-                t: [Triggers.onEvent(_Events.Events.stageCar), Triggers.onEvent(_Events.Events.stageRain), Triggers.onEvent(_Events.Events.stageElevator), Triggers.onEvent(_Events.Events.stageBulgar), Triggers.onEvent(_Events.Events.stageHome)],
+                t: [Triggers.onEvent(Events.stageCar), Triggers.onEvent(Events.stageRain), Triggers.onEvent(Events.stageElevator), Triggers.onEvent(Events.stageBulgar), Triggers.onEvent(Events.stageHome)],
                 r: Rewards.call("walk")
             }, {
-                t: [Triggers.onEvent(_Events.Events.stageCarEnd), Triggers.onEvent(_Events.Events.stageRainEnd), Triggers.onEvent(_Events.Events.stageElevatorEnd), Triggers.onEvent(_Events.Events.stageBulgarEnd)],
+                t: [Triggers.onEvent(Events.stageCarEnd), Triggers.onEvent(Events.stageRainEnd), Triggers.onEvent(Events.stageElevatorEnd), Triggers.onEvent(Events.stageBulgarEnd)],
                 r: Rewards.call("stop")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageRainEnd),
+                t: Triggers.onEvent(Events.stageRainEnd),
                 r: Rewards.call("hideDrops")
             }, {
-                t: Triggers.onEvent(_Rod.RodEvents.rodOpened, {
+                t: Triggers.onEvent(Rod.RodEvents.rodOpened, {
                     name: RODS_rod1
                 }),
                 r: Rewards.call("showDrops")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageBasement),
+                t: Triggers.onEvent(Events.stageBasement),
                 r: Rewards.call("setFalling")
             }, {
-                t: Triggers.onEvent(_Events.Events.stageBasementEnd),
+                t: Triggers.onEvent(Events.stageBasementEnd),
                 r: Rewards.hide()
             }, {
-                t: Triggers.onEvent(_Rod.RodEvents.rodOpened, {
+                t: Triggers.onEvent(Rod.RodEvents.rodOpened, {
                     name: RODS_rod6
                 }),
                 r: Rewards.call("setHappy")
@@ -1728,7 +1728,7 @@ const config = {
                 }
             },
             on: [{
-                t: Triggers.onEvent(_Events.Events.stageCarMove),
+                t: Triggers.onEvent(Events.stageCarMove),
                 r: Rewards.show()
             }, {
                 t: Triggers.onAnimationEnd("show"),
@@ -1745,10 +1745,10 @@ const config = {
             t: Triggers.onceSkip(),
             r: Rewards.setStage("final")
         }, {
-            t: Triggers.onEvent(_Events.Events.gameWin),
+            t: Triggers.onEvent(Events.gameWin),
             r: Rewards.setStage("final")
         }, {
-            t: Triggers.onEvent(_Events.Events.gameFail),
+            t: Triggers.onEvent(Events.gameFail),
             r: Rewards.setStage("finalFail")
         }],
         sprites: [{
@@ -1777,7 +1777,7 @@ const config = {
                 }
             },
             on: [{
-                t: Triggers.onEvent(_Events.Events.stageRain),
+                t: Triggers.onEvent(Events.stageRain),
                 r: Rewards.show()
             }, {
                 t: Triggers.onAnimationEnd("show"),
@@ -1820,7 +1820,7 @@ const config = {
             class: Packshot,
             parentStages: ["final", "finalFail"],
             on: [{
-                t: Triggers.onEvent(_Rod.RodEvents.rodTouch, {
+                t: Triggers.onEvent(Rod.RodEvents.rodTouch, {
                     name: RODS_rod5
                 }),
                 c: Conditions.flags({
